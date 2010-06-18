@@ -1,7 +1,7 @@
 from neuron import *
+from node import *
+from arc import *
 
-instance = neuron('monnode','mafunction')
+test_primary_node = neuron(node(None,None), 1) # second parameter is fct => 1
 
-print instance.node
-instance.node = 4
-print instance.node
+print test_primary_node.function
