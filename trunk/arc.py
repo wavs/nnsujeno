@@ -1,6 +1,7 @@
 class arc(object):
 	def __init__(self, weight, beginNode, endNode):
 		self._weight = weight
+		## add arc to BeginNode
 		self._beginNode = beginNode
 		self._endNode = endNode
 	
@@ -15,6 +16,7 @@ class arc(object):
 	def getbeginNode(self):
 		return self._beginNode
 	def setbeginNode(self, value):
+		## delete arc in current beginnode
 		self._beginNode = value
 	def delbeginNode(self):
 		del self._beginNode
@@ -23,6 +25,7 @@ class arc(object):
 	def getendNode(self):
 		return self._endNode
 	def setendNode(self, value):
+		## delete link in current endnode
 		self._endNode = value
 	def delendNode(self):
 		del self._endNode
