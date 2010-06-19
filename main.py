@@ -1,5 +1,6 @@
 from neuron import *
 from arc import *
+from math import *
 
 poudre = 2
 
@@ -11,7 +12,7 @@ err = 0
 derr = 0
 
 # entree de maxErr
-maxError = 10
+maxError = 2
 # entree de maxDeltaEr
 maxDerr = 10
 # entree de maxDeltaPoudre
@@ -41,20 +42,28 @@ neuronMaxDP = neuron(funMaxDP)
 ###### fuzzification
 
 # learn how to draw gaussienne
-()*exp((-0.5)*((x - mu)/(sigma))^2)
+
 def gaussienne(x,mu,sigma):
-	return ()
+	return (1/(sigma*sqrt(2*pi))) * exp( -0.5 * ( pow((x - mu) / (sigma),2 ) ))	
+def gaussEqual(x, error): # equal error
+	return gaussienne(x,0,0.166666667*error) 
+def gaussLT(x, error): # less than error
+	return gaussienne(x, -0.5*error,0.166666667*error)
+def gaussMT(x, error): #more than error
+	return gaussienne(x, 0.5*error,0.166666667*error)
+
+
 
 ## on a six regles 3 pour le delta erreur et 3 pour le erreur
 ## neuron erreur
-neuronErrorLessThan = neuron()
-neuronErrorEqual
-neuronErrorMoreThan
+#euronErrorLessThan = neuron()
+#neuronErrorEqual = neuron()
+#neuronErrorMoreThan = neuron()
 
 ## neuron delta erreur
-neuronDErrorLessThan
-neuronDErrorEqual
-neuronDErrorMoreThan
+#neuronDErrorLessThan = neuron()
+#neuronDErrorEqual = neuron()
+#neuronDErrorMoreThan = neuron()
 
 ## binding des entrees avec la fuzzification
 
@@ -110,5 +119,6 @@ neuronBcarre.bindTo(neuronMult, -0.5)
 #print "neuronAcarre",(neuronAcarre.function)
 #print "neuronBcarre",(neuronBcarre.function)
 print "NeuronMult",(neuronMult.function)
+
 
 ### fin multiplication exemple
