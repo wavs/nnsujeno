@@ -103,10 +103,63 @@ neuronmuDPmaxMMT = neuron(funtwothird)
 neuronMaxDP.bindTo(neuronmuDPmaxMMT, maxDpoudre)
 
 ###### end of fuzzification
-
 ###### SUGENO
+## A signifie le poid et Y signifie fonction de contribution?=
 
-
+## neuron less than less than == llthan
+nLTLTA = multiplication(neuronGELT, neuronGDELT)
+nY1 = neuron(fununit)
+neuronGELT.bindTo(nY1, 0.5)
+neuronGDELT.bindTo(nY1, 0.5)
+nLTLTY = multiplication(nY1, neuronmuDPmaxLLT)
+## neuron less than equal == lthan
+nLTEA = multiplication(neuronGELT, neuronGDEE)
+nY2 = neuron(fununit)
+neuronGELT.bindTo(nY2, 0.5)
+neuronGDEE.bindTo(nY2, 0.5)
+nLTEY = multiplication(nY2, neuronmuDPmaxLT)
+## neuron less than more than == equal
+nLTMTA = multiplication(neuronGELT, neuronGDEMT)
+nY3 = neuron(fununit)
+neuronGELT.bindTo(nY3, 0.5)
+neuronGDEMT.bindTo(nY3, 0.5)
+nLTMTY = multiplication(nY3, neuronmuDPmaxE)
+## neuron equal less than == lthan
+nELTA = multiplication(neuronGEE, neuronGDELT)
+nY4 = neuron(fununit)
+neuronGEE.bindTo(nY4, 0.5)
+neuronGDELT.bindTo(nY4, 0.5)
+nELTY = multiplication(nY4, neuronmuDPmaxLT)
+## neuron equal equal == equal
+nEEA = multiplication(neuronGEE, neuronGDEE)
+nY5 = neuron(fununit)
+neuronGEE.bindTo(nY5, 0.5)
+neuronGDEE.bindTo(nY5, 0.5)
+nEEY = multiplication(nY5, neuronmuDPmaxE)
+## neuron equal more than = mthan
+nEMTA = multiplication(neuronGEE, neuronGDEMT)
+nY6 = neuron(fununit)
+neuronGEE.bindTo(nY6, 0.5)
+neuronGDEMT.bindTo(nY6, 0.5)
+nEMTY = multiplication(nY6, neuronmuDPmaxMT)
+## neuron more than less than == equal
+nMTLTA = multiplication(neuronGEMT, neuronGDELT)
+nY7 = neuron(fununit)
+neuronGEMT.bindTo(nY7, 0.5)
+neuronGDELT.bindTo(nY7, 0.5)
+nMTLTY = multiplication(nY7, neuronmuDPmaxE)
+## neuron more than equal == morthan
+nMTEA = multiplication(neuronGEMT, neuronGDEE)
+nY8 = neuron(fununit)
+neuronGEMT.bindTo(nY8, 0.5)
+neuronGDEE.bindTo(nY8, 0.5)
+nMTEY = multiplication(nY8, neuronmuDPmaxMT)
+## neuron more than more than == mmthan
+nMTMTA = multiplication(neuronGEMT, neuronGDEMT)
+nY9 = neuron(fununit)
+neuronGEMT.bindTo(nY9, 0.5)
+neuronGDEMT.bindTo(nY9, 0.5)
+nMTMTY = multiplication(nY9, neuronmuDPmaxMMT)
 ###### end of SUGENO
 
 ###### Defuzzification
