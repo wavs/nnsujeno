@@ -164,6 +164,53 @@ nMTMTY = multiplication(nY9, neuronmuDPmaxMMT)
 
 ###### Defuzzification
 
+#doing sum of all A
+neuronsumofA = neuron(fununit)
+
+nMTMTA.bindTo(neuronsumofA)
+nMTEA.bindTo(neuronsumofA)
+nMTLTA.bindTo(neuronsumofA)
+
+nEMTA.bindTo(neuronsumofA)
+nEEA.bindTo(neuronsumofA)
+nELTA.bindTo(neuronsumofA)
+
+nLTLMA.bindTo(neuronsumofA)
+nLTEA.bindTo(neuronsumofA)
+nLTMTA.bindTo(neuronsumofA)
+# doing for each 9 of the sugeno result ai*yi / the previous sum
+## meaning of those are obvious (look into the multiplication)
+ndefuzz1 = division(multiplication(nMTMTA,nMTMTY), neuronsumofA)
+ndefuzz2 = division(multiplication(nMTEA,nMTEY), neuronsumofA)
+ndefuzz3 = division(multiplication(nMTLTA,nMTLTY), neuronsumofA)
+
+ndefuzz4 = division(multiplication(nEMTA,nEMTY), neuronsumofA)
+ndefuzz5 = division(multiplication(nEEA,nEEY), neuronsumofA)
+ndefuzz6 = division(multiplication(nELTA,nELTY), neuronsumofA)
+
+ndefuzz7 = division(multiplication(nLTLMA,nLTLMY), neuronsumofA)
+ndefuzz8 = division(multiplication(nLTEA,nLTEY), neuronsumofA)
+ndefuzz9 = division(multiplication(nLTMTA,nLTMTY), neuronsumofA)
+
+## doing graph for those function to
+
+# doing all the sum of the previous 9 item
+neuronDefuzzOut = neuron(fununit)
+
+ndefuzz1.bindTo(neuronDefuzzOut, 1)
+ndefuzz2.bindTo(neuronDefuzzOut, 1)
+ndefuzz3.bindTo(neuronDefuzzOut, 1)
+
+ndefuzz4.bindTo(neuronDefuzzOut, 1)
+ndefuzz5.bindTo(neuronDefuzzOut, 1)
+ndefuzz6.bindTo(neuronDefuzzOut, 1)
+
+ndefuzz7.bindTo(neuronDefuzzOut, 1)
+ndefuzz8.bindTo(neuronDefuzzOut, 1)
+ndefuzz9.bindTo(neuronDefuzzOut, 1)
+
+## it's our output -->> deltapoudre we want
+# neuronDefuzzOut.function is our output <== Deltapoudre
 
 ###### end of Defuzzification
 
@@ -178,12 +225,6 @@ neuronB = neuron(funb)
 
 neuronMult = division(neuronA, neuronB)
 
-#print "neuronA", (neuronA.function)
-#print "neuronB", (neuronB.function)
-#print "neuronAplusBcarre",(neuronAplusBcarre.function)
-#print "neuronAcarre",(neuronAcarre.function)
-#print "neuronBcarre",(neuronBcarre.function)
 print "NeuronMult",(neuronMult.function)
-
 
 ### fin multiplication exemple
