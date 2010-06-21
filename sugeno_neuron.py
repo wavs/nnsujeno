@@ -7,6 +7,10 @@ class sugeno_neuronal(object):
 		self._maxDpoudre = maxDpoudre
 		self._erreur = 0.5
 		self._derreur = 0.0
+		self.initInput()
+		self.fuzzification()
+		self.sujeno_rules()
+		self.defuzzification()
 	def update(self, erreur):
 		self._derreur = self._erreur - erreur
 		self._erreur = erreur
@@ -194,8 +198,8 @@ class sugeno_neuronal(object):
 		## it's our output -->> deltapoudre we want
 		# neuronDefuzzOut.function is our output <== Deltapoudre
 	def output(self):
-		self.initInput()
-		self.fuzzification()
-		self.sujeno_rules()
-		self.defuzzification()
+		## we reset neuron 	self._neuronErreur = neuron(self.funerreur) 
+		##	self._neuronDErreur = neuron(self.funderreur)
+		self._neuronDErreur.function = self.funderreur
+		self._neuronErreur.function = self.funerreu
 		return self._neuronDefuzzOut.function
