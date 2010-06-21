@@ -201,5 +201,5 @@ class sugeno_neuronal(object):
 		## we reset neuron 	self._neuronErreur = neuron(self.funerreur) 
 		##	self._neuronDErreur = neuron(self.funderreur)
 		self._neuronDErreur.function = self.funderreur
-		self._neuronErreur.function = self.funerreu
+		self._neuronErreur.function = self.funerreur
 		return self._neuronDefuzzOut.function
