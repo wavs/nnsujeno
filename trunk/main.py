@@ -2,16 +2,13 @@ from neuron import *
 from arc import *
 from math import *
 from math_neuron import *
+from sugeno_neuron import *
+from physic_cmd import *
 
-poudre = 2
-
-###### debut entree
-
-# entree d'erreur
-err = 0.5
-# entree de delta erreur
-derr = 0
-
+cible = 10.0
+seuil = 0.1
+current_pos = 0.0
+poudre = 10.0
 # entree de maxErr
 maxError = 4
 # entree de maxDeltaEr
@@ -19,6 +16,21 @@ maxDerr = 10
 # entree de maxDeltaPoudre
 maxDpoudre = 10
 
+
+physics_module = physics(0)
+physics_module.draw()
+command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre)
+
+while 0 & ( (cible - current_pos) >  seuil):
+ 	command_module.update(cible - current_pos)
+	physics_module.update(command_module.output())
+	current_pos = physics_module.output()
+###### debut entree
+
+# entree d'erreur
+err = 0.5
+# entree de delta erreur
+derr = 0
 
 ### neuronne
 def funerreur(x):

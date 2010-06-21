@@ -1,14 +1,14 @@
 from math_neuron import *
 
-class sugeno_neuron(object):
+class sugeno_neuronal(object):
 	def __init__(self, maxErreur, maxDerreur, maxDpoudre):
 		self._maxErreur = maxErreur
 		self._maxDerreur = maxDerreur
 		self._maxDpoudre = maxDpoudre
 		self._erreur = 0
 		self._derreur = 0
-	def update(erreur):
-		self._derreur = self_.erreur - erreur
+	def update(self, erreur):
+		self._derreur = self._erreur - erreur
 		self._erreur = erreur
 	def funerreur(x):
 		return self._erreur
@@ -20,3 +20,5 @@ class sugeno_neuron(object):
 		self.neuronMaxE = neuron(fun1)
 		self.neuronMaxDE = neuron(fun1)
 		self.neuronMaxDP = neuron(fun1)
+	def output(self):
+		return 0
