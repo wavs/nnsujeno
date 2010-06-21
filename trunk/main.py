@@ -167,17 +167,17 @@ nMTMTY = multiplication(nY9, neuronmuDPmaxMMT)
 #doing sum of all A
 neuronsumofA = neuron(fununit)
 
-nMTMTA.bindTo(neuronsumofA)
-nMTEA.bindTo(neuronsumofA)
-nMTLTA.bindTo(neuronsumofA)
+nMTMTA.bindTo(neuronsumofA,1)
+nMTEA.bindTo(neuronsumofA,1)
+nMTLTA.bindTo(neuronsumofA,1)
 
-nEMTA.bindTo(neuronsumofA)
-nEEA.bindTo(neuronsumofA)
-nELTA.bindTo(neuronsumofA)
+nEMTA.bindTo(neuronsumofA,1)
+nEEA.bindTo(neuronsumofA,1)
+nELTA.bindTo(neuronsumofA,1)
 
-nLTLMA.bindTo(neuronsumofA)
-nLTEA.bindTo(neuronsumofA)
-nLTMTA.bindTo(neuronsumofA)
+nLTLTA.bindTo(neuronsumofA,1)
+nLTEA.bindTo(neuronsumofA,1)
+nLTMTA.bindTo(neuronsumofA,1)
 # doing for each 9 of the sugeno result ai*yi / the previous sum
 ## meaning of those are obvious (look into the multiplication)
 ndefuzz1 = division(multiplication(nMTMTA,nMTMTY), neuronsumofA)
@@ -188,7 +188,7 @@ ndefuzz4 = division(multiplication(nEMTA,nEMTY), neuronsumofA)
 ndefuzz5 = division(multiplication(nEEA,nEEY), neuronsumofA)
 ndefuzz6 = division(multiplication(nELTA,nELTY), neuronsumofA)
 
-ndefuzz7 = division(multiplication(nLTLMA,nLTLMY), neuronsumofA)
+ndefuzz7 = division(multiplication(nLTLTA,nLTLTY), neuronsumofA)
 ndefuzz8 = division(multiplication(nLTEA,nLTEY), neuronsumofA)
 ndefuzz9 = division(multiplication(nLTMTA,nLTMTY), neuronsumofA)
 
@@ -211,6 +211,7 @@ ndefuzz9.bindTo(neuronDefuzzOut, 1)
 
 ## it's our output -->> deltapoudre we want
 # neuronDefuzzOut.function is our output <== Deltapoudre
+print neuronDefuzzOut.function
 
 ###### end of Defuzzification
 
