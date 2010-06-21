@@ -18,8 +18,9 @@ maxDpoudre = 10
 
 
 physics_module = physics(0)
-physics_module.draw()
 command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre)
+
+print "commande module test", command_module.output()
 
 while 0 & ( (cible - current_pos) >  seuil):
  	command_module.update(cible - current_pos)
@@ -223,7 +224,7 @@ ndefuzz9.bindTo(neuronDefuzzOut, 1)
 
 ## it's our output -->> deltapoudre we want
 # neuronDefuzzOut.function is our output <== Deltapoudre
-print neuronDefuzzOut.function
+print "neurondefuzzout",neuronDefuzzOut.function
 
 ###### end of Defuzzification
 
