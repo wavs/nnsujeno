@@ -1,6 +1,11 @@
 from pylab import *
 from math import *
 
+xmin = -50
+xmax = 50
+ymin = -50
+ymax = 50
+
 class physics(object):
 	def __init__(self, poudre):
 		self._poudre = poudre
@@ -19,7 +24,8 @@ class physics(object):
 		x = self._vo*cos(self._theta)*t
 		y = (self._vo*cos(self._theta)*t)/(-0.5*self._g*t*t)
 		plot(x, y, linewidth=10.0)
-		xmin, xmax = xlim()
+		xlim(xmin, ymax)
+		ylim(ymin, ymax)
 		print 'xmin', xmin, 'xmax', xmax
 		xlabel('x')
 		ylabel('y')
