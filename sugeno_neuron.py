@@ -191,7 +191,6 @@ class sugeno_neuronal(object):
 		self._ndefuzz7.bindTo(self._neuronDefuzzOut, 1)
 		self._ndefuzz8.bindTo(self._neuronDefuzzOut, 1)
 		self._ndefuzz9.bindTo(self._neuronDefuzzOut, 1)
-		print self._neuronDefuzzOut.function
 		## it's our output -->> deltapoudre we want
 		# neuronDefuzzOut.function is our output <== Deltapoudre
 	def output(self):
