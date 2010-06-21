@@ -21,11 +21,15 @@ class physics(object):
 		return (self._vo*self._vo/ self._g)
 	def draw(self):
 		t = 1
-		x = self._vo*cos(self._theta)*t
-		y = (self._vo*cos(self._theta)*t)/(-0.5*self._g*t*t)
-		plot(x, y, linewidth=10.0)
-		xlim(xmin, ymax)
-		ylim(ymin, ymax)
+
+		for t in range(100):
+			if t > 0:
+				x = self._vo*cos(self._theta)*t
+				y = (self._vo*cos(self._theta)*t)/(-0.5*self._g*t*t)
+				xlim(xmin, ymax)
+				ylim(ymin, ymax)
+				plot(x, y, linewidth=1.0)
+
 		print 'xmin', xmin, 'xmax', xmax
 		xlabel('x')
 		ylabel('y')
