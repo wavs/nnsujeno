@@ -1,3 +1,55 @@
+from math import *
+
+class physicSystem(object):
+	def __init__(self, consigne):
+		""" Position et vitesse d'origine """
+		self._x0 = 0
+		self._y0 = 0
+		self._v0 = 0
+		
+		""" Constantes """
+		self._gravity = 9.64
+		self._theta = 45
+		
+		self._omega = 0
+		self._p = 0
+		self._consigne = consigne
+		self._olderror = 0
+		self._coefError = 0.1
+
+	def vx(self, p):
+		return (p * cos(self._theta))
+		
+	def vy(self, p):
+		return (p * sin(self._theta))
+
+	def posx(self, t):
+		return ( (-0.5 * self._gravity * t * t * self._omega) + (self.vx(self._p) * t) + self._x0 )
+
+	def posy(self, t):
+		return ( (-0.5 * self._gravity * t * t) + (self.vy(self._p) * t) + self._y0 )
+		
+	def distance(self, x, y, theta):
+		return ( sqrt((x * x) + (y * y)) )
+		
+	def powder(self, x, y, theta):
+		return ( self.distance(x,y,theta) / 2 )
+		
+	def impact(self, p):
+		return ( self.posx( (2 * p * sin(self._theta)) / self._gravity ) )
+		
+	def getNewError(self):
+		return ( self._consigne - self.impact(self._p) )
+		
+	def getNewDeltaError(self, error):
+		return ( error - self._olderror )
+		
+	def computeNewPosition(self, error):
+		self._p = self._p + (self._coefError * error)
+
+		
+
+"""
 from pylab import *
 from math import *
 
@@ -36,3 +88,4 @@ class physics(object):
 		title('About as simple as it gets, folks')
 		grid(True)
 		show()
+"""
