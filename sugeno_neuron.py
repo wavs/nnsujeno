@@ -196,34 +196,37 @@ class sugeno_neuronal(object):
 	def printSujenoRules(self):
 		print "BEGIN SUJENO RULES"
 		print "neuron |more than|more than| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDEMT.function ," = %g" %self._nMTMTA.function
-		print "neuron |more than|more than| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxMMT.function,")) = %g" %self._nMTMTY.function
+		print "neuron |more than|more than| Y = (0.5*ge+0.5gde)*muMMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxMMT.function,")) = %g" %self._nMTMTY.function
 		
 		print "neuron |more than|less than| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDELT.function ," = %g" %self._nMTLTA.function
-		print "neuron |more than|less than| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDELT.function,")*(%g" %self._neuronmuDPmaxMT.function,")) = %g" %self._nMTLTY.function
+		print "neuron |more than|less than| Y = (0.5*ge+0.5gde)*muE =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDELT.function,")*(%g" %self._neuronmuDPmaxE.function,")) = %g" %self._nMTLTY.function
 		
 		print "neuron |more than|equal| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDEE.function ," = %g" %self._nMTEA.function
-		print "neuron |more than|equal| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxE.function,")) = %g" %self._nMTEY.function
+		print "neuron |more than|equal| Y = (0.5*ge+0.5gde)*muMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxMT.function,")) = %g" %self._nMTEY.function
 		print
+
+
+		print "neuron |less than|more than| A = ge*gde = (%g *" %self._neuronGELT.function, " %g)" %self._neuronGDEMT.function ," = %g" %self._nLTMTA.function
+		print "neuron |less than|more than| Y = (0.5*ge+0.5gde)*muE =((0.5*%g" %self._neuronGELT.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxE.function,")) = %g" %self._nLTMTY.function
+		
+		print "neuron |less than|less than| A = ge*gde = (%g *" %self._neuronGELT.function, " %g)" %self._neuronGDELT.function ," = %g" %self._nLTLTA.function
+		print "neuron |less than|less than| Y = (0.5*ge+0.5gde)*muLLT =((0.5*%g" %self._neuronGELT.function, "+ 0.5*%g" %self._neuronGDELT.function,")*(%g" %self._neuronmuDPmaxLLT.function,")) = %g" %self._nLTLTY.function
+		
+		print "neuron |less than|equal| A = ge*gde = (%g *" %self._neuronGELT.function, " %g)" %self._neuronGDEE.function ," = %g" %self._nLTEA.function
+		print "neuron |less than|equal| Y = (0.5*ge+0.5gde)*muLT =((0.5*%g" %self._neuronGELT.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxLT.function,")) = %g" %self._nLTEY.function
+		print
+
 	
-		print "neuron |less than|more than| A (ge()*gde())", self._nLTMTA.function
-		print "neuron |less than|more than| Y ((0.5ge() + 0.5gde())*(mu de MTMT))", self._nLTMTY.function
+		print "neuron |equal|more than| A = ge*gde = (%g *" %self._neuronGEE.function, " %g)" %self._neuronGDEMT.function ," = %g" %self._nEMTA.function
+		print "neuron |equal|more than| Y = (0.5*ge+0.5gde)*muMT =((0.5*%g" %self._neuronGEE.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxMT.function,")) = %g" %self._nEMTY.function
 		
-		print "neuron |less than|less than| A (ge()*gde())",self._nLTLTA.function
-		print "neuron |less than|less than| Y ((0.5ge() + 0.5gde())*(mu de MTMT))",self._nLTLTY.function
+		print "neuron |equal|less than| A = ge*gde = (%g *" %self._neuronGEE.function, " %g)" %self._neuronGDELT.function ," = %g" %self._nELTA.function
+		print "neuron |equal|less than| Y = (0.5*ge+0.5gde)*muLT =((0.5*%g" %self._neuronGEE.function, "+ 0.5*%g" %self._neuronGDELT.function,")*(%g" %self._neuronmuDPmaxLT.function,")) = %g" %self._nELTY.function
 		
-		print "neuron |less than|equal| A (ge()*gde())",self._nLTEA.function
-		print "neuron |less than|equal| Y ((0.5ge() + 0.5gde())*(mu de MTMT))",self._nLTEY.function
+		print "neuron |equal|equal| A = ge*gde = (%g *" %self._neuronGEE.function, " %g)" %self._neuronGDEE.function ," = %g" %self._nEEA.function
+		print "neuron |equal|equal| Y = (0.5*ge+0.5gde)*muE =((0.5*%g" %self._neuronGEE.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxE.function,")) = %g" %self._nEEY.function
 		print
-		
-		
-		print "neuron |equal|more than| A (ge()*gde())", self._nEMTA.function
-		print "neuron |equal|more than| Y ((0.5ge() + 0.5gde())*(mu de MTMT))", self._nEMTY.function
-		
-		print "neuron |equal|less than| A (ge()*gde())",self._nELTA.function
-		print "neuron |equal|less than| Y ((0.5ge() + 0.5gde())*(mu de MTMT))",self._nELTY.function
-		
-		print "neuron |equal|equal| A (ge()*gde())",self._nEEA.function
-		print "neuron |equal|equal| Y ((0.5ge() + 0.5gde())*(mu de MTMT))",self._nEEY.function
+
 		print "END SUJENO RULES\n"
 	def defuzzification(self):
 		#doing sum of all A
@@ -272,6 +275,22 @@ class sugeno_neuronal(object):
 		self._ndefuzz9.bindTo(self._neuronDefuzzOut, 1)
 		## it's our output -->> deltapoudre we want
 		# neuronDefuzzOut.function is our output <== Deltapoudre
+	def printDefuzzification(self):
+		print "BEGIN DEFUZZIFICATION"
+		print "sum of A=%g" %self._neuronsumofA.function
+		print "activation regles MT:MT = %g" %self._ndefuzz1.function
+		print "activation regles MT:E = %g" %self._ndefuzz2.function
+		print "activation regles MT:LT = %g" %self._ndefuzz3.function
+		
+		print "activation regles E:MT = %g" %self._ndefuzz4.function
+		print "activation regles E:E = %g" %self._ndefuzz5.function
+		print "activation regles E:LT = %g" %self._ndefuzz6.function
+		
+		print "activation regles LT:LT = %g" %self._ndefuzz7.function
+		print "activation regles LT:E = %g" %self._ndefuzz8.function
+		print "activation regles LT:MT = %g" %self._ndefuzz9.function
+		
+		print "END DEFUZZIFICATION\n"
 	def output(self):
 		## we reset neuron 	self._neuronErreur = neuron(self.funerreur) 
 		##	self._neuronDErreur = neuron(self.funderreur)
