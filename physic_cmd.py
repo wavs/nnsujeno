@@ -45,8 +45,8 @@ class physics(object):
 		xlabel("x")
 		ylabel("y")
 		legend()
-		ylim(0.0, ((x + 1) / 2))
-		xlim(0.0, x + 1)
+		ylim(0.0, ((x + 2) / 2))
+		xlim(0.0, x + 2)
 	def show(self):
 		show()
 
