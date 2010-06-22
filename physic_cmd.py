@@ -1,7 +1,5 @@
 from math import *
-
 from pylab import *
-from math import *
 
 xmin = 0
 xmax = 50
@@ -17,9 +15,11 @@ class physics(object):
 		self._yo = 0.
 		self._increment = 0.01
 		self._v0 = self._poudre * 2.0
+		self._nbrIteration = 0
 	def update(self, deltapoudre):
 		self._poudre = self._poudre + deltapoudre
 		self._v0 = self._poudre * 2.0
+		self._nbrIteration = self._nbrIteration + 1
 	def output(self):
 		# v^2 /g
 		return (self._v0*self._v0/ self._g)
@@ -40,18 +40,18 @@ class physics(object):
 			valuesofy.append(y)
 			valuesofx.append(x)
 
-		plot(valuesofx, valuesofy, label='boulet')
+		plot(valuesofx, valuesofy, label="boulet %g" %self._nbrIteration)
 		title('Evolution du boulet au cours du temps')
 		xlabel("x")
 		ylabel("y")
 		legend()
-		ylim(-0.0, ((x + 1) / 2))
-		xlim(-0.0, x + 1)
+		ylim(0.0, ((x + 1) / 2))
+		xlim(0.0, x + 1)
 	def show(self):
 		show()
 
 
-
+## obsolete
 class physicSystem(object):
 	def __init__(self, consigne):
 		""" Position et vitesse d'origine """
