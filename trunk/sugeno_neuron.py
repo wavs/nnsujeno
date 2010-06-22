@@ -199,10 +199,10 @@ class sugeno_neuronal(object):
 		print "neuron |more than|more than| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxMMT.function,")) = %g" %self._nMTMTY.function
 		
 		print "neuron |more than|less than| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDELT.function ," = %g" %self._nMTLTA.function
-		print "neuron |more than|less than| Y = (0.5*ge+0.5gde)*muMT =((0.5*",self._neuronGEMT.function,"+ 0.5",self._neuronGDELT.function,")*(",self._neuronmuDPmaxMT.function,")) = ",self._nMTLTY.function
+		print "neuron |more than|less than| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDELT.function,")*(%g" %self._neuronmuDPmaxMT.function,")) = %g" %self._nMTLTY.function
 		
 		print "neuron |more than|equal| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDEE.function ," = %g" %self._nMTEA.function
-		print "neuron |more than|equal| Y = (0.5*ge+0.5gde)*muE =((0.5*",self._neuronGEMT.function,"+ 0.5",self._neuronGDEE.function,")*(",self._neuronmuDPmaxE.function,")) = ",self._nMTEY.function
+		print "neuron |more than|equal| Y = (0.5*ge+0.5gde)*muMTMT =((0.5*%g" %self._neuronGEMT.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxE.function,")) = %g" %self._nMTEY.function
 		print
 	
 		print "neuron |less than|more than| A (ge()*gde())", self._nLTMTA.function
