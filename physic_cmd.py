@@ -1,5 +1,57 @@
 from math import *
 
+from pylab import *
+from math import *
+
+xmin = 0
+xmax = 50
+ymin = 0
+ymax = 50
+
+class physics(object):
+	def __init__(self, poudre):
+		self._poudre = poudre
+		self._theta = 45.0
+		self._g = 10.0
+		self._xo = 0.
+		self._yo = 0.
+		self._increment = 0.01
+		self._v0 = self._poudre * 2.0
+	def update(self, deltapoudre):
+		self._poudre = self._poudre + deltapoudre
+		self._v0 = self._poudre * 2.0
+	def output(self):
+		# v^2 /g
+		return (self._v0*self._v0/ self._g)
+	def posx(self,t):
+		return (self._xo + (self._v0*cos(45.0)*t))
+	def posy(self,t):
+		return (self._yo + (self._v0*sin(45.0)*t) - ((self._g*t*t)/2.0))
+	def draw(self):
+		time = 0
+		valuesofy = []
+		valuesofx = []
+		y = 0
+		x = 0
+		while (y >= 0.0):
+			y = self.posy(time)
+			x = self.posx(time)
+			time = time + self._increment
+			valuesofy.append(y)
+			valuesofx.append(x)
+
+		plot(valuesofx, valuesofy, label='boulet')
+		title('Evolution du boulet au cours du temps')
+		xlabel("x")
+		ylabel("y")
+		legend()
+		ylim(-0.0, ((x + 1) / 2))
+		xlim(-0.0, x + 1)
+	def show(self):
+		show()
+
+
+
 class physicSystem(object):
 	def __init__(self, consigne):
 		""" Position et vitesse d'origine """
@@ -46,46 +98,3 @@ class physicSystem(object):
 		
 	def computeNewPosition(self, error):
 		self._p = self._p + (self._coefError * error)
-
-		
-
-"""
-from pylab import *
-from math import *
-
-xmin = -50
-xmax = 50
-ymin = -50
-ymax = 50
-
-class physics(object):
-	def __init__(self, poudre):
-		self._poudre = poudre
-		self._theta = 45.0
-		self._g = 10.0
-		self._xo = 0.
-		self._yo = 0.
-		self._vo = poudre * 5.0
-	def update(self, deltapoudre):
-		self._poudre = self._poudre + deltapoudre
-	def output(self):
-		# v^2 /g
-		return (self._vo*self._vo/ self._g)
-	def draw(self):
-		t = 1
-
-		for t in range(100):
-			if t > 0:
-				x = self._vo*cos(self._theta)*t
-				y = (self._vo*cos(self._theta)*t)/(-0.5*self._g*t*t)
-				xlim(xmin, ymax)
-				ylim(ymin, ymax)
-				plot(x, y, linewidth=1.0)
-
-		print 'xmin', xmin, 'xmax', xmax
-		xlabel('x')
-		ylabel('y')
-		title('About as simple as it gets, folks')
-		grid(True)
-		show()
-"""
