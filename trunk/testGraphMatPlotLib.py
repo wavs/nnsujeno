@@ -1,6 +1,6 @@
 import numpy as np
 import pylab as pl
-from scipy.special import jn
+#from scipy.special import jn
 from math import *
 from physic_cmd import *
 
@@ -30,6 +30,8 @@ while (error > 0.1):
 pl.plot(times, valuesOfError, label='Error')
 pl.plot(times, valuesOfDeltaError, label='DeltaError')
 pl.title('Evolution de lerreur et de sa derivee')
+pl.xlabel("time")
+pl.ylabel("")
 pl.legend()
 
 pl.show()
