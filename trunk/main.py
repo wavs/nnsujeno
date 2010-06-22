@@ -15,18 +15,75 @@ maxError = 20
 # entree de maxDeltaEr
 maxDerr = 20
 # entree de maxDeltaPoudre
-maxDpoudre = 4
+maxDpoudre = 7.69
 
 
 physics_module = physics(poudre)
 command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre)
 
 command_module.update(cible - current_pos)
-command_module.printInput()
-command_module.printFuzzification()
-command_module.printSujenoRules()
-print command_module.output()
+#command_module.printInput()
+#command_module.printFuzzification()
+#command_module.printSujenoRules()
+#command_module.printDefuzzification()
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
 physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"	
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"	
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"	
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause\n"	
+print "physics module output %g" %physics_module.output()
+print "command module output %g" %command_module.output()
+physics_module.update(command_module.output()) ## update w/ deltapoudre
+current_pos = physics_module.output()
+print "currentpos = %g" %current_pos
+command_module.update(cible - current_pos)
+print "pause"
+
+
 #physics_module.draw()
 
 
