@@ -55,8 +55,8 @@ while (( abs(cible - current_pos) >  seuil) and (time < 200)):
 	
 
 	times.append(time)
-	print "cible - current_pos" ,(cible - current_pos)
-	command_module.printInput()
+#	print "cible - current_pos" ,(cible - current_pos)
+#	command_module.printInput()
 	time = time + 1
 
 ## si l'on n'aime pas la fin des courbes, on commente les append suivant
@@ -93,7 +93,7 @@ ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
 """
 
-#"""
+"""
 ### print predicat derreur
 plot(times, command_module._predicaterreurlt, label='predicat erreur lt')
 plot(times, command_module._predicaterreurmt, label='predicat erreur mt')
@@ -103,7 +103,7 @@ xlim(0,len(times))
 ylim(-0.2,1.4)
 title('Evolution des predicats erreur')
 ## print predicat
-#"""
+"""
 
 """
 ### print predicat derreur
@@ -111,7 +111,7 @@ plot(times, command_module._predicatderreurlt, label='predicat derreur lt')
 plot(times, command_module._predicatderreurmt, label='predicat derreur mt')
 plot(times, command_module._predicatderreure, label='predicat derreur e')
 
-xlim(0,len(times)/2) ## techniquement c'est len(times) mais on peut diviser parce ce que l'on veut pour que ce soit plus clair
+xlim(0,len(times)) ## techniquement c'est len(times) mais on peut diviser parce ce que l'on veut pour que ce soit plus clair
 ylim(-0.2,1.4)
 title('Evolution des predicats derreur')
 ## print predicat
@@ -131,13 +131,13 @@ plot(times, command_module._Y7, label="LT MT", linewidth=2)
 plot(times, command_module._Y8, label="LT E", linewidth=2)
 plot(times, command_module._Y9, label="LT LT", linewidth=2)
 
-xlim(0,len(times)/3)
+xlim(0,len(times))
 ylim(0,3)
 title("predicat y1--y9")
 ## fin predicat Y1 -- Y9
 """
 
-"""
+#"""
 ### print predicat Ay1 - Ay9
 plot(times, command_module._AY1, label="MT MT", linewidth=2)
 plot(times, command_module._AY2, label="MT E", linewidth=2)
@@ -151,11 +151,11 @@ plot(times, command_module._AY7, label="LT MT", linewidth=2)
 plot(times, command_module._AY8, label="LT E", linewidth=2)
 plot(times, command_module._AY9, label="LT LT", linewidth=2)
 
-xlim(0,len(times)/3)
+xlim(0,len(times))
 ylim(0,2.2)
 title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## fin predicat Y1 -- Y9
-"""
+#"""
 
 """
 ## graphique pour la derivee de la quantitee de poudre
@@ -169,7 +169,7 @@ plot(times, command_module._E, label="E", linewidth=2)
 plot(times, command_module._LT, label="LT", linewidth=2)
 plot(times, command_module._LLT, label="LLT", linewidth=2)
 
-xlim(0, len(times)/3)
+xlim(0, len(times))
 ylim(0, 2)
 title("graphique pour la derivee de la quantitee de poudre")
 
