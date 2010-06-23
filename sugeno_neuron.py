@@ -7,17 +7,115 @@ class sugeno_neuronal(object):
 		self._maxDpoudre = maxDpoudre
 		self._erreur = 0.0
 		self._derreur = 0.0
+		self._nbrIteration = 0
+		## predicats
+		self._predicaterreurlt = []
+		self._predicaterreure = []
+		self._predicaterreurmt = []
+		self._predicatderreurlt = []
+		self._predicatderreure = []
+		self._predicatderreurmt = []
+		# Yi
+		self._Y1 = [] ## MT MT
+		self._Y2 = [] ## MT E
+		self._Y3 = [] ## MT LT
+		
+		self._Y4 = [] ## E MT
+		self._Y5 = [] ## E E
+		self._Y6 = [] ## E LT
+		
+		self._Y7 = [] ## LT MT
+		self._Y8 = [] ## LT E
+		self._Y9 = [] ## LT LT
+		
+		# AiYi/A# 
+		self._AY1 = [] ## MT MT
+		self._AY2 = [] ## MT E
+		self._AY3 = [] ## MT LT
+		
+		self._AY4 = [] ## E MT
+		self._AY5 = [] ## E E
+		self._AY6 = [] ## E LT
+		
+		self._AY7 = [] ## LT MT
+		self._AY8 = [] ## LT E
+		self._AY9 = [] ## LT LT
 		self.initInput()
 		self.fuzzification()
 		self.sujeno_rules()
 		self.defuzzification()
+	
 	def update(self, erreur):
+		## predicats
+		
+		if len(self._predicaterreurlt) == self._nbrIteration:
+			self._predicaterreurlt.append(self._neuronGELT.function)
+		if len(self._predicaterreure) == self._nbrIteration:
+			self._predicaterreure.append(self._neuronGEE.function)
+		if len(self._predicaterreurmt) == self._nbrIteration:
+			self._predicaterreurmt.append(self._neuronGEMT.function)
+
+		if len(self._predicatderreurlt) == self._nbrIteration:
+			self._predicatderreurlt.append(self._neuronGDELT.function)
+		if len(self._predicatderreure) == self._nbrIteration:
+			self._predicatderreure.append(self._neuronGDEE.function)
+		if len(self._predicatderreurmt) == self._nbrIteration:
+			self._predicatderreurmt.append(self._neuronGDEMT.function)
+		# Yi
+		if len(self._Y1) == self._nbrIteration:
+			self._Y1.append(self._nMTMTA.function)
+		if len(self._Y2) == self._nbrIteration:
+			self._Y2.append(self._nMTEA.function)
+		if len(self._Y3) == self._nbrIteration:
+			self._Y3.append(self._nMTLTA.function)
+
+		if len(self._Y4) == self._nbrIteration:
+			self._Y4.append(self._nMTLTA.function)
+		if len(self._Y5) == self._nbrIteration:
+			self._Y5.append(self._nEEA.function)
+		if len(self._Y6) == self._nbrIteration:
+			self._Y6.append(self._nELTA.function)
+
+		if len(self._Y7) == self._nbrIteration:
+			self._Y7.append(self._nLTMTA.function)
+		if len(self._Y8) == self._nbrIteration:
+			self._Y8.append(self._nLTEA.function)
+		if len(self._Y9) == self._nbrIteration:
+			self._Y9.append(self._nLTLTA.function)
+		
+		# AiYi/A# 
+		if len(self._AY1) == self._nbrIteration:
+			self._AY1.append(self._ndefuzz1.function)
+		if len(self._AY2) == self._nbrIteration:
+			self._AY2.append(self._ndefuzz2.function)
+		if len(self._AY3) == self._nbrIteration:
+			self._AY3.append(self._ndefuzz3.function)
+
+		if len(self._AY4) == self._nbrIteration:
+			self._AY4.append(self._ndefuzz4.function)
+		if len(self._AY5) == self._nbrIteration:
+			self._AY5.append(self._ndefuzz5.function)
+		if len(self._AY6) == self._nbrIteration:
+			self._AY6.append(self._ndefuzz6.function)
+
+		if len(self._AY7) == self._nbrIteration:
+			self._AY7.append(self._ndefuzz9.function)
+		if len(self._AY8) == self._nbrIteration:
+			self._AY8.append(self._ndefuzz8.function)
+		if len(self._AY9) == self._nbrIteration:
+			self._AY9.append(self._ndefuzz7.function) ## je me suis juste trompe
+		## dans la fonction defuzzification
+		
 		self._derreur = self._erreur - erreur
 		self._erreur = erreur
+		self._nbrIteration = self._nbrIteration + 1
+	
 	def funerreur(self,x):
 		return self._erreur
+	
 	def funderreur(self,x):
 		return self._derreur
+	
 	def initInput(self):
 		## les valeurs max ERROR MAXDPOUDRE ET MAX DERROR Doivent etre des poids
 		self._neuronErreur = neuron(self.funerreur) ## fun1 est defini dans math_neuron
@@ -25,6 +123,7 @@ class sugeno_neuronal(object):
 		self._neuronMaxE = neuron(fun1)
 		self._neuronMaxDE = neuron(fun1)
 		self._neuronMaxDP = neuron(fun1)
+	
 	def printInput(self):
 		print "BEGIN PRINT INPUT"
 		print "Neuron Erreur", self._neuronErreur.function
@@ -35,7 +134,7 @@ class sugeno_neuronal(object):
 		print "Neuron MaxDpoudre", self._neuronMaxDP.function
 		print "END PRINT INPUT"
 		print
-		
+	
 	def fuzzification(self):
 		###### fuzzification
 		## pour errmax et derrmax sigma = 1/6 Errmax ou Derrmax et mu = -1/2 0 ou 1/2
@@ -56,10 +155,13 @@ class sugeno_neuronal(object):
 
 		# neuron gaussienne ERREUR LT
 		self._neuronGELT = gaussienne(self._neuronErreur, self._neuronmuEmaxLT, self._neuronsigmaEmax)
+
 		# neuron gaussienne ERREUR EQUAL
 		self._neuronGEE = gaussienne(self._neuronErreur, self._neuronmuEmaxE, self._neuronsigmaEmax)
+
 		# neuron gaussienne ERREUR MT
 		self._neuronGEMT = gaussienne(self._neuronErreur, self._neuronmuEmaxMT, self._neuronsigmaEmax)
+
 
 		### valeur gaussienne deltaerrmax
 		#neuron derrmax sigma |less than| more than | equal
@@ -77,10 +179,13 @@ class sugeno_neuronal(object):
 
 		# neuron gaussienne DERREUR LT
 		self._neuronGDELT = gaussienne(self._neuronDErreur, self._neuronmuDEmaxLT, self._neuronsigmaDEmax)
+
 		# neuron gaussienne DERREUR EQUAL
 		self._neuronGDEE = gaussienne(self._neuronDErreur, self._neuronmuDEmaxE, self._neuronsigmaDEmax)
+		
 		# neuron gaussienne DERREUR MT
 		self._neuronGDEMT = gaussienne(self._neuronDErreur, self._neuronmuDEmaxMT, self._neuronsigmaDEmax)
+
 
 		### valeur gaussienne deltapoudremax
 		#### on a besoin que du mu
@@ -103,6 +208,7 @@ class sugeno_neuronal(object):
 		self._neuronmuDPmaxMMT = neuron(funtwothird)
 		self._neuronMaxDP.bindTo(self._neuronmuDPmaxMMT, self._maxDpoudre)
 		###### end of fuzzification
+	
 	def printFuzzification_sigma_mu(self):
 		print "BEGIN FUZZIFICATION SIGMA MU"
 		print "_neuron sigmaEmax", self._neuronsigmaEmax.function
@@ -122,7 +228,7 @@ class sugeno_neuronal(object):
 		print "neuron mu DPoudre max more more than", self._neuronmuDPmaxMMT.function
 
 		print "END FUZZIFICATION SIGMA MU\n"
-		
+	
 	def printFuzzification(self):
 		print "BEGIN FUZZIFICATION"
 		print "neuron erreur gaussienne LT = %g" %self._neuronGELT.function
@@ -134,6 +240,7 @@ class sugeno_neuronal(object):
 		print "neuron Derreur gaussienne MT = %g" %self._neuronGDEMT.function
 		
 		print "END FUZZIFICATION\n"
+	
 	def sujeno_rules(self):
 		## A signifie le poid et Y signifie fonction de contribution?=
 
@@ -193,6 +300,7 @@ class sugeno_neuronal(object):
 		self._neuronGDEMT.bindTo(nY9, 0.5)
 		self._nMTMTY = multiplication(nY9, self._neuronmuDPmaxMMT)
 		###### end of SUGENO rules
+	
 	def printSujenoRules(self):
 		print "BEGIN SUJENO RULES"
 		print "neuron |more than|more than| A = ge*gde = (%g *" %self._neuronGEMT.function, " %g)" %self._neuronGDEMT.function ," = %g" %self._nMTMTA.function
@@ -215,8 +323,8 @@ class sugeno_neuronal(object):
 		print "neuron |less than|equal| A = ge*gde = (%g *" %self._neuronGELT.function, " %g)" %self._neuronGDEE.function ," = %g" %self._nLTEA.function
 		print "neuron |less than|equal| Y = (0.5*ge+0.5gde)*muLT =((0.5*%g" %self._neuronGELT.function, "+ 0.5*%g" %self._neuronGDEE.function,")*(%g" %self._neuronmuDPmaxLT.function,")) = %g" %self._nLTEY.function
 		print
-
-	
+		
+		
 		print "neuron |equal|more than| A = ge*gde = (%g *" %self._neuronGEE.function, " %g)" %self._neuronGDEMT.function ," = %g" %self._nEMTA.function
 		print "neuron |equal|more than| Y = (0.5*ge+0.5gde)*muMT =((0.5*%g" %self._neuronGEE.function, "+ 0.5*%g" %self._neuronGDEMT.function,")*(%g" %self._neuronmuDPmaxMT.function,")) = %g" %self._nEMTY.function
 		
@@ -228,6 +336,7 @@ class sugeno_neuronal(object):
 		print
 
 		print "END SUJENO RULES\n"
+	
 	def defuzzification(self):
 		#doing sum of all A
 		self._neuronsumofA = neuron(fununit)
@@ -275,6 +384,7 @@ class sugeno_neuronal(object):
 		self._ndefuzz9.bindTo(self._neuronDefuzzOut, 1)
 		## it's our output -->> deltapoudre we want
 		# neuronDefuzzOut.function is our output <== Deltapoudre
+	
 	def printDefuzzification(self):
 		print "BEGIN DEFUZZIFICATION"
 		print "sum of A=%g" %self._neuronsumofA.function
@@ -291,6 +401,7 @@ class sugeno_neuronal(object):
 		print "activation regles LT:MT = %g" %self._ndefuzz9.function
 		
 		print "END DEFUZZIFICATION\n"
+	
 	def output(self):
 		## we reset neuron 	self._neuronErreur = neuron(self.funerreur) 
 		##	self._neuronDErreur = neuron(self.funderreur)
