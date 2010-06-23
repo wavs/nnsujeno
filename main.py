@@ -1,11 +1,12 @@
 from sugeno_neuron import *
 from physic_cmd import *
 from pylab import *
+from math_neuron import *
 
 
 ## pour le systeme globale
 cible = 10.0
-seuil = 0.02
+seuil = 0.1
 current_pos = 0.0
 delta_poudre = 0.0
 
@@ -17,48 +18,68 @@ maxError = 20
 # entree de maxDeltaEr
 maxDerr = 20
 # entree de maxDeltaPoudre
-maxDpoudre = 6
+maxDpoudre = 3.5
 
+maxEapprentissage = 6
 
 Erreurs = []
 deltaErreurs = []
 deltaPoudres = []
+ErreursLearn = []
 Positions = []
 times = []
 time = 0
 
 physics_module = physics(poudre)
-command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre)
+command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre, maxEapprentissage, cible)
 
 
-while ( (cible - current_pos) >  seuil):
+while (( abs(cible - current_pos) >  seuil) and (time < 200)):
 
 	
-	command_module.update(cible - current_pos)  ## update w/ erreur
+	ErreursLearn.append(command_module._neuronLearnGaussienne.function)
 	delta_poudre = command_module.output()
+	command_module.update(cible - current_pos)  ## update w/ erreur
+
 
 #	command_module.printFuzzification()
 #	print "physics module output %g" %current_pos
 #	print "command module output %g" %delta_poudre
-	physics_module.update(delta_poudre) ## update w/ deltapoudre
-	current_pos = physics_module.output() ## new pos
-	
 	Positions.append(current_pos)
 	deltaPoudres.append(delta_poudre)
 	deltaErreurs.append(command_module.funderreur(1))
 	Erreurs.append(command_module.funerreur(1))
+
+	physics_module.update(delta_poudre) ## update w/ deltapoudre
+	current_pos = physics_module.output() ## new pos
+	
+
 	times.append(time)
+#	print "cible - current_pos" ,(cible - current_pos)
+#	command_module.printInput()
 	time = time + 1
 #	print "currentpos = %g" %current_pos
 #	print "pause\n"
 
 
-#"""
+"""
 ## print erreurs, positions, delta poudre, delta erreurs en fonction du temps
 plot(times, Erreurs, label='Errors')
 plot(times, deltaPoudres, label='DeltaPoudres')
 plot(times, Positions, label='Positions')
 plot(times, deltaErreurs, label='deltaerreurs')
+xlim(0,time + 1)
+ylim(-cible, cible + 1)
+title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
+"""
+
+#"""
+## print erreurs, positions, delta poudre, delta erreurs et apprentisage en fonction du temps
+plot(times, Erreurs, label='Errors', linewidth=2)
+plot(times, deltaPoudres, label='DeltaPoudres', linewidth=2)
+plot(times, Positions, label='Positions', linewidth=2)
+plot(times, deltaErreurs, label='deltaerreurs', linewidth=2)
+plot(times, ErreursLearn, label='ErreursLearn', linewidth=2)
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')

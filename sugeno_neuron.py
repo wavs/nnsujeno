@@ -1,13 +1,15 @@
 from math_neuron import *
 
 class sugeno_neuronal(object):
-	def __init__(self, maxErreur, maxDerreur, maxDpoudre):
+	def __init__(self, maxErreur, maxDerreur, maxDpoudre, maxELearn, consigne):
 		self._maxError = maxErreur
 		self._maxDerr = maxDerreur
 		self._maxDpoudre = maxDpoudre
+		self._maxELearn = maxELearn
 		self._erreur = 0.0
 		self._derreur = 0.0
 		self._nbrIteration = 0
+		self._consigne = consigne
 		## predicats
 		self._predicaterreurlt = []
 		self._predicaterreure = []
@@ -62,7 +64,7 @@ class sugeno_neuronal(object):
 			self._predicaterreure.append(self._neuronGEE.function)
 		if len(self._predicaterreurmt) == self._nbrIteration:
 			self._predicaterreurmt.append(self._neuronGEMT.function)
-
+		
 		if len(self._predicatderreurlt) == self._nbrIteration:
 			self._predicatderreurlt.append(self._neuronGDELT.function)
 		if len(self._predicatderreure) == self._nbrIteration:
@@ -132,17 +134,21 @@ class sugeno_neuronal(object):
 	
 	def funerreur(self,x):
 		return self._erreur
-	
+	def funiteration(self,x):
+		return self._nbrIteration
 	def funderreur(self,x):
 		return self._derreur
+	
 	
 	def initInput(self):
 		## les valeurs max ERROR MAXDPOUDRE ET MAX DERROR Doivent etre des poids
 		self._neuronErreur = neuron(self.funerreur) ## fun1 est defini dans math_neuron
 		self._neuronDErreur = neuron(self.funderreur) ## generalement toutes les fun sont dans math_neu
+		self._neuronIteration = neuron(self.funiteration)
 		self._neuronMaxE = neuron(fun1)
 		self._neuronMaxDE = neuron(fun1)
 		self._neuronMaxDP = neuron(fun1)
+		self._neuronMaxELearn = neuron(fun1)
 	
 	def printInput(self):
 		print "BEGIN PRINT INPUT"
@@ -152,11 +158,20 @@ class sugeno_neuronal(object):
 		print "Neuron MaxErreur", self._neuronMaxE.function
 		print "Neuron MaxDerreur", self._neuronMaxDE.function
 		print "Neuron MaxDpoudre", self._neuronMaxDP.function
+		print "Neuron MaxELearn", self._neuronMaxELearn.function
 		print "END PRINT INPUT"
 		print
 	
 	def fuzzification(self):
 		###### fuzzification
+		## apprentissage
+		self._neuronsigmaEmaxLearn = neuron(funthird)
+		self._neuronMaxELearn.bindTo(self._neuronsigmaEmaxLearn, self._maxELearn)
+		self._neuronmuEmaxLearn = neuron(fun0)
+		self._neuronMaxELearn.bindTo(self._neuronmuEmaxLearn, self._maxELearn)
+		tempgaussienneAppre = gaussienne(self._neuronIteration, self._neuronmuEmaxLearn, self._neuronsigmaEmaxLearn)
+		self._neuronLearnGaussienne = neuron(fununit)
+		tempgaussienneAppre.bindTo(self._neuronLearnGaussienne, self._consigne)
 		## pour errmax et derrmax sigma = 1/6 Errmax ou Derrmax et mu = -1/2 0 ou 1/2
 		## de errmax ou derrmax
 		######## valeur gaussienne errmax
@@ -427,5 +442,7 @@ class sugeno_neuronal(object):
 		##	self._neuronDErreur = neuron(self.funderreur)
 		self._neuronDErreur.function = self.funderreur
 		self._neuronErreur.function = self.funerreur
+		self._neuronIteration.function = self.funiteration
+		
 		return self._neuronDefuzzOut.function
 	
