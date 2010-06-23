@@ -18,7 +18,7 @@ maxError = 20
 # entree de maxDeltaEr
 maxDerr = 20
 # entree de maxDeltaPoudre
-maxDpoudre = 3.5
+maxDpoudre = 4
 
 maxEapprentissage = 6
 
@@ -55,12 +55,19 @@ while (( abs(cible - current_pos) >  seuil) and (time < 200)):
 	
 
 	times.append(time)
-#	print "cible - current_pos" ,(cible - current_pos)
-#	command_module.printInput()
+	print "cible - current_pos" ,(cible - current_pos)
+	command_module.printInput()
 	time = time + 1
-#	print "currentpos = %g" %current_pos
-#	print "pause\n"
 
+## si l'on n'aime pas la fin des courbes, on commente les append suivant
+#"""
+ErreursLearn.append(command_module._neuronLearnGaussienne.function)
+Positions.append(current_pos)
+deltaPoudres.append(delta_poudre)
+deltaErreurs.append(command_module.funderreur(1))
+Erreurs.append(command_module.funerreur(1))
+times.append(time)
+#"""
 
 """
 ## print erreurs, positions, delta poudre, delta erreurs en fonction du temps
