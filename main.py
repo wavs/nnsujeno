@@ -106,7 +106,7 @@ title("predicat y1--y9")
 ## fin predicat Y1 -- Y9
 """
 
-#"""
+"""
 ### print predicat Ay1 - Ay9
 plot(times, command_module._AY1, label="MT MT", linewidth=2)
 plot(times, command_module._AY2, label="MT E", linewidth=2)
@@ -124,7 +124,24 @@ xlim(0,len(times)/3)
 ylim(0,2.2)
 title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## fin predicat Y1 -- Y9
+"""
+
 #"""
+## graphique pour la derivee de la quantitee de poudre
+
+plot(times, command_module._MMT, label="MMT", linewidth=2)
+plot(times, command_module._MT, label="MMT", linewidth=2)
+plot(times, command_module._E, label="E", linewidth=2)
+plot(times, command_module._LT, label="LT", linewidth=2)
+plot(times, command_module._LLT, label="LLT", linewidth=2)
+
+xlim(0, len(times))
+ylim(0, 5)
+title("graphique pour la derivee de la quantitee de poudre")
+
+## fin du graphique pour la derivee de la quantitee de poudre
+#"""
+
 
 
 xlabel("iterations")
@@ -133,6 +150,8 @@ legend()
 
 show()
 
+
+## old loop
 """
 while ( (cible - current_pos) >  seuil):
 	command_module.update(cible - current_pos)  ## update w/ erreur

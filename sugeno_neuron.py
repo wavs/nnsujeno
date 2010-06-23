@@ -40,6 +40,14 @@ class sugeno_neuronal(object):
 		self._AY7 = [] ## LT MT
 		self._AY8 = [] ## LT E
 		self._AY9 = [] ## LT LT
+		
+		# deltapoudre just for fun
+		self._MMT = []
+		self._MT = []
+		self._E = []
+		self._LT = []
+		self._LLT = []
+		
 		self.initInput()
 		self.fuzzification()
 		self.sujeno_rules()
@@ -105,6 +113,18 @@ class sugeno_neuronal(object):
 		if len(self._AY9) == self._nbrIteration:
 			self._AY9.append(self._ndefuzz7.function) ## je me suis juste trompe
 		## dans la fonction defuzzification
+		
+		# deltapoudre just for fun
+		if len(self._MMT) == self._nbrIteration:
+			self._MMT.append(self._ndefuzz1.function)
+		if len(self._MT) == self._nbrIteration:
+			self._MT.append(self._ndefuzz2.function + self._ndefuzz4.function)
+		if len(self._E) == self._nbrIteration:
+			self._E.append(self._ndefuzz3.function + self._ndefuzz5.function + self._ndefuzz9.function)
+		if len(self._LT) == self._nbrIteration:
+			self._LT.append(self._ndefuzz8.function + self._ndefuzz6.function)
+		if len(self._LLT) == self._nbrIteration:
+			self._LLT.append(self._ndefuzz7.function)
 		
 		self._derreur = self._erreur - erreur
 		self._erreur = erreur
@@ -408,3 +428,4 @@ class sugeno_neuronal(object):
 		self._neuronDErreur.function = self.funderreur
 		self._neuronErreur.function = self.funerreur
 		return self._neuronDefuzzOut.function
+	
