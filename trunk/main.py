@@ -66,6 +66,7 @@ Positions.append(current_pos)
 deltaPoudres.append(delta_poudre)
 deltaErreurs.append(command_module.funderreur(1))
 Erreurs.append(command_module.funerreur(1))
+command_module.update(cible - current_pos)
 times.append(time)
 #"""
 
