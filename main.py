@@ -32,34 +32,37 @@ command_module = sugeno_neuronal(maxError, maxDerr, maxDpoudre)
 
 
 while ( (cible - current_pos) >  seuil):
-	Positions.append(current_pos)
-	deltaPoudres.append(delta_poudre)
-	deltaErreurs.append(command_module.funderreur(1))
-	Erreurs.append(command_module.funerreur(1))
-	times.append(time)
+
 	
 	command_module.update(cible - current_pos)  ## update w/ erreur
 	delta_poudre = command_module.output()
+
 #	command_module.printFuzzification()
 #	print "physics module output %g" %current_pos
 #	print "command module output %g" %delta_poudre
 	physics_module.update(delta_poudre) ## update w/ deltapoudre
 	current_pos = physics_module.output() ## new pos
+	
+	Positions.append(current_pos)
+	deltaPoudres.append(delta_poudre)
+	deltaErreurs.append(command_module.funderreur(1))
+	Erreurs.append(command_module.funerreur(1))
+	times.append(time)
 	time = time + 1
 #	print "currentpos = %g" %current_pos
 #	print "pause\n"
 
 
-"""
+#"""
 ## print erreurs, positions, delta poudre, delta erreurs en fonction du temps
 plot(times, Erreurs, label='Errors')
 plot(times, deltaPoudres, label='DeltaPoudres')
 plot(times, Positions, label='Positions')
 plot(times, deltaErreurs, label='deltaerreurs')
 xlim(0,time + 1)
-ylim(0, cible + 1)
+ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
-"""
+#"""
 
 """
 ### print predicat derreur
@@ -126,7 +129,7 @@ title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## fin predicat Y1 -- Y9
 """
 
-#"""
+"""
 ## graphique pour la derivee de la quantitee de poudre
 
 ## ca correspond aux sorties ai*yi/moyemme
@@ -143,7 +146,7 @@ ylim(0, 2)
 title("graphique pour la derivee de la quantitee de poudre")
 
 ## fin du graphique pour la derivee de la quantitee de poudre
-#"""
+"""
 
 
 
