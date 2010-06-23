@@ -73,6 +73,8 @@ title('Evolution des predicats erreur')
 ## print predicat
 
 """
+
+"""
 ### print predicat derreur
 plot(times, command_module._predicatderreurlt, label='predicat derreur lt')
 plot(times, command_module._predicatderreurmt, label='predicat derreur mt')
@@ -82,6 +84,46 @@ xlim(0,len(times)/2) ## techniquement c'est len(times) mais on peut diviser parc
 ylim(-0.2,1.4)
 title('Evolution des predicats derreur')
 ## print predicat
+"""
+
+"""
+### print predicat y1 - y9
+plot(times, command_module._Y1, label="MT MT", linewidth=2)
+plot(times, command_module._Y2, label="MT E", linewidth=2)
+plot(times, command_module._Y3, label="MT LT", linewidth=2)
+
+plot(times, command_module._Y4, label="E MT", linewidth=2)
+plot(times, command_module._Y5, label="E E", linewidth=2)
+plot(times, command_module._Y6, label="E LT", linewidth=2)
+
+plot(times, command_module._Y7, label="LT MT", linewidth=2)
+plot(times, command_module._Y8, label="LT E", linewidth=2)
+plot(times, command_module._Y9, label="LT LT", linewidth=2)
+
+xlim(0,len(times)/3)
+ylim(0,3)
+title("predicat y1--y9")
+## fin predicat Y1 -- Y9
+"""
+
+#"""
+### print predicat Ay1 - Ay9
+plot(times, command_module._AY1, label="MT MT", linewidth=2)
+plot(times, command_module._AY2, label="MT E", linewidth=2)
+plot(times, command_module._AY3, label="MT LT", linewidth=2)
+
+plot(times, command_module._AY4, label="E MT", linewidth=2)
+plot(times, command_module._AY5, label="E E", linewidth=2)
+plot(times, command_module._AY6, label="E LT", linewidth=2)
+
+plot(times, command_module._AY7, label="LT MT", linewidth=2)
+plot(times, command_module._AY8, label="LT E", linewidth=2)
+plot(times, command_module._AY9, label="LT LT", linewidth=2)
+
+xlim(0,len(times)/3)
+ylim(0,2.2)
+title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
+## fin predicat Y1 -- Y9
 #"""
 
 
