@@ -6,7 +6,7 @@ from math_neuron import *
 
 ## pour le systeme globale
 cible = 10.0
-seuil = 0.2
+seuil = 0.01
 current_pos = 0.0
 delta_poudre = 0.0
 
@@ -18,7 +18,9 @@ maxError = cible*2
 # entree de maxDeltaEr
 maxDerr = cible*2
 # entree de maxDeltaPoudre
-maxDpoudre = 10
+maxDpoudre = 2.5
+#maxDpoudre = 5
+#maxDpoudre = 7
 
 maxEapprentissage = 6
 
@@ -73,7 +75,7 @@ command_module.update(cible - current_pos)
 times.append(time)
 #"""
 
-#"""
+"""
 ## print erreurs, positions, delta poudre, delta erreurs en fonction du temps
 plot(times, Erreurs, label='Errors')
 plot(times, deltaPoudres, label='DeltaPoudres')
@@ -82,9 +84,9 @@ plot(times, deltaErreurs, label='deltaerreurs')
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
-#"""
-
 """
+
+#"""
 ## print erreurs, positions, delta poudre, delta erreurs et apprentisage en fonction du temps
 plot(times, Erreurs, label='Errors', linewidth=2)
 plot(times, deltaPoudres, label='DeltaPoudres', linewidth=2)
@@ -95,7 +97,7 @@ plot(times, DerreurLearn, label='DerreurLearn', linewidth=2)
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
-"""
+#"""
 
 """
 ### print predicat derreur
@@ -115,7 +117,7 @@ plot(times, command_module._predicatderreurlt, label='predicat derreur lt')
 plot(times, command_module._predicatderreurmt, label='predicat derreur mt')
 plot(times, command_module._predicatderreure, label='predicat derreur e')
 
-xlim(0,len(times)) ## techniquement c'est len(times) mais on peut diviser parce ce que l'on veut pour que ce soit plus clair
+xlim(0,len(times)/2) ## techniquement c'est len(times) mais on peut diviser parce ce que l'on veut pour que ce soit plus clair
 ylim(-0.2,1.4)
 title('Evolution des predicats derreur')
 ## print predicat
@@ -135,8 +137,8 @@ plot(times, command_module._Y7, label="LT MT", linewidth=2)
 plot(times, command_module._Y8, label="LT E", linewidth=2)
 plot(times, command_module._Y9, label="LT LT", linewidth=2)
 
-xlim(0,len(times))
-ylim(0,3)
+xlim(0,50)
+ylim(0,1.1)
 title("predicat y1--y9")
 ## fin predicat Y1 -- Y9
 """
@@ -156,7 +158,7 @@ plot(times, command_module._AY8, label="LT E", linewidth=2)
 plot(times, command_module._AY9, label="LT LT", linewidth=2)
 
 xlim(0,len(times))
-ylim(0,2.2)
+ylim(0,2)
 title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## fin predicat Y1 -- Y9
 """
@@ -167,11 +169,11 @@ title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## ca correspond aux sorties ai*yi/moyemme
 ## qu'on somme pour faire correspondre les regles
 
-plot(times, command_module._MMT, label="MMT", linewidth=2)
-plot(times, command_module._MT, label="MMT", linewidth=2)
-plot(times, command_module._E, label="E", linewidth=2)
-plot(times, command_module._LT, label="LT", linewidth=2)
-plot(times, command_module._LLT, label="LLT", linewidth=2)
+plot(times, command_module._MMT, label=">>", linewidth=2)
+plot(times, command_module._MT, label=">", linewidth=2)
+plot(times, command_module._E, label="==", linewidth=2)
+plot(times, command_module._LT, label="<", linewidth=2)
+plot(times, command_module._LLT, label="<<", linewidth=2)
 
 xlim(0, len(times))
 ylim(0, 2)
