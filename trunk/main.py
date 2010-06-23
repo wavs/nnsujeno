@@ -6,7 +6,7 @@ from math_neuron import *
 
 ## pour le systeme globale
 cible = 10.0
-seuil = 0.1
+seuil = 0.2
 current_pos = 0.0
 delta_poudre = 0.0
 
@@ -14,11 +14,11 @@ delta_poudre = 0.0
 poudre = 0.0
 ## pour sujeno_neuronal ou sujeno_normal
 # entree de maxErr
-maxError = 20
+maxError = cible*2
 # entree de maxDeltaEr
-maxDerr = 20
+maxDerr = cible*2
 # entree de maxDeltaPoudre
-maxDpoudre = 4
+maxDpoudre = 10
 
 maxEapprentissage = 6
 
@@ -26,6 +26,7 @@ Erreurs = []
 deltaErreurs = []
 deltaPoudres = []
 ErreursLearn = []
+DerreurLearn = []
 Positions = []
 times = []
 time = 0
@@ -50,6 +51,7 @@ while (( abs(cible - current_pos) >  seuil) and (time < 200)):
 	deltaErreurs.append(command_module.funderreur(1))
 	Erreurs.append(command_module.funerreur(1))
 
+	DerreurLearn.append(command_module._neuronLearnGaussienne.function - command_module.funerreur(1))
 	physics_module.update(delta_poudre) ## update w/ deltapoudre
 	current_pos = physics_module.output() ## new pos
 	
@@ -66,11 +68,12 @@ Positions.append(current_pos)
 deltaPoudres.append(delta_poudre)
 deltaErreurs.append(command_module.funderreur(1))
 Erreurs.append(command_module.funerreur(1))
+DerreurLearn.append(command_module._neuronLearnGaussienne.function - command_module.funerreur(1))
 command_module.update(cible - current_pos)
 times.append(time)
 #"""
 
-"""
+#"""
 ## print erreurs, positions, delta poudre, delta erreurs en fonction du temps
 plot(times, Erreurs, label='Errors')
 plot(times, deltaPoudres, label='DeltaPoudres')
@@ -79,7 +82,7 @@ plot(times, deltaErreurs, label='deltaerreurs')
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
-"""
+#"""
 
 """
 ## print erreurs, positions, delta poudre, delta erreurs et apprentisage en fonction du temps
@@ -88,6 +91,7 @@ plot(times, deltaPoudres, label='DeltaPoudres', linewidth=2)
 plot(times, Positions, label='Positions', linewidth=2)
 plot(times, deltaErreurs, label='deltaerreurs', linewidth=2)
 plot(times, ErreursLearn, label='ErreursLearn', linewidth=2)
+plot(times, DerreurLearn, label='DerreurLearn', linewidth=2)
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
@@ -137,7 +141,7 @@ title("predicat y1--y9")
 ## fin predicat Y1 -- Y9
 """
 
-#"""
+"""
 ### print predicat Ay1 - Ay9
 plot(times, command_module._AY1, label="MT MT", linewidth=2)
 plot(times, command_module._AY2, label="MT E", linewidth=2)
@@ -155,7 +159,7 @@ xlim(0,len(times))
 ylim(0,2.2)
 title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 ## fin predicat Y1 -- Y9
-#"""
+"""
 
 """
 ## graphique pour la derivee de la quantitee de poudre
