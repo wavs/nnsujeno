@@ -80,7 +80,7 @@ ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
 """
 
-#"""
+"""
 ## print erreurs, positions, delta poudre, delta erreurs et apprentisage en fonction du temps
 plot(times, Erreurs, label='Errors', linewidth=2)
 plot(times, deltaPoudres, label='DeltaPoudres', linewidth=2)
@@ -90,9 +90,9 @@ plot(times, ErreursLearn, label='ErreursLearn', linewidth=2)
 xlim(0,time + 1)
 ylim(-cible, cible + 1)
 title('Evolution des: erreurs, delta erreurs, delta poudre et positions')
-#"""
-
 """
+
+#"""
 ### print predicat derreur
 plot(times, command_module._predicaterreurlt, label='predicat erreur lt')
 plot(times, command_module._predicaterreurmt, label='predicat erreur mt')
@@ -102,8 +102,7 @@ xlim(0,len(times))
 ylim(-0.2,1.4)
 title('Evolution des predicats erreur')
 ## print predicat
-
-"""
+#"""
 
 """
 ### print predicat derreur
