@@ -129,14 +129,17 @@ title("contribution unitaire, centre de gravite a1y1/sum(ai)--a9y9/sum(ai)")
 #"""
 ## graphique pour la derivee de la quantitee de poudre
 
+## ca correspond aux sorties ai*yi/moyemme
+## qu'on somme pour faire correspondre les regles
+
 plot(times, command_module._MMT, label="MMT", linewidth=2)
 plot(times, command_module._MT, label="MMT", linewidth=2)
 plot(times, command_module._E, label="E", linewidth=2)
 plot(times, command_module._LT, label="LT", linewidth=2)
 plot(times, command_module._LLT, label="LLT", linewidth=2)
 
-xlim(0, len(times))
-ylim(0, 5)
+xlim(0, len(times)/3)
+ylim(0, 2)
 title("graphique pour la derivee de la quantitee de poudre")
 
 ## fin du graphique pour la derivee de la quantitee de poudre
