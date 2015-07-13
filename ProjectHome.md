@@ -1,0 +1,1 @@
+Make sujeno into a neural network. for
